@@ -1,0 +1,24 @@
+import time
+import json
+from datetime import datetime
+
+STAGES = ["Checkout", "Build", "Test", "Package", "Deploy"]
+
+def log_stage(stage_name):
+    start = time.time()
+    time.sleep(1)  # simulate processing
+    end = time.time()
+    return {"stage": stage_name, "duration": round(end - start, 2)}
+
+def run_build():
+    log = []
+    for stage in STAGES:
+        log.append(log_stage(stage))
+
+    with open("build_log.json", "w") as f:
+        json.dump({"timestamp": datetime.now().isoformat(), "log": log}, f, indent=4)
+
+    print("Build log saved to build_log.json")
+
+if __name__ == "__main__":
+    run_build()

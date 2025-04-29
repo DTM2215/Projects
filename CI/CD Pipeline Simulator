@@ -1,0 +1,23 @@
+import time
+import random
+
+def simulate_stage(name, duration_range=(1, 3)):
+    print(f"Starting {name}...")
+    time.sleep(random.uniform(*duration_range))
+    success = random.choice([True, True, False])  # simulate possible failure
+    if success:
+        print(f"{name} completed successfully.\n")
+    else:
+        print(f"{name} failed!\n")
+    return success
+
+def run_pipeline():
+    stages = ["Build", "Unit Test", "Integration Test", "Deploy"]
+    for stage in stages:
+        if not simulate_stage(stage):
+            print("Pipeline aborted.")
+            return
+    print("CI/CD Pipeline completed successfully.")
+
+if __name__ == "__main__":
+    run_pipeline()
